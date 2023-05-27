@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section id="breadcrumbWrap">
+        <div class="breadcrumbFullwidth">
+            <div class="leftBreadcrumb"></div>
+            <div class="container content">
+                <h1><br>Rasmiy munosabat<br></h1>
+                <div class="hallofFameWrap">
+                    <div class="hallofFameCon row">
+                        {% for habar in page_obj %}
+                        <div class="row news__block">
+                            <div class="col-md-3">
+                                {% if habar.rasm %}
+                                    <img src="{{habar.rasm.url}}" class="news__img" style="width: 100%;">
+                                {% else %}
+                                    <img src="/media/noimage.png" class="news__img" style="width: 100%;">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-9">
+                                <a href="{% url 'detail' habar.slug %}"
+                                    class="news__block_tle">
+                                    {{ habar.nomi }}
+                                </a>
+                                <hr>
+                                <p class="news__block_txt">
+                                    {{ habar.qisqacha }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

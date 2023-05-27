@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="homeSliderWrap">
+    <div class="container">
+        <div class="slider_wrapper">
+            <div class="row">
+                <div class="col-md-8 slider_img" style="opacity: 1; top: 0px;">
+                    <img src="{% if yangiliklar.0.rasm %}{{ yangiliklar.0.rasm.url }}{% endif %}" title="{{ yangiliklar.0.nomi }}">
+                    <div class="img_info">
+                        <p>
+                            <a href="{% url 'detail' yangiliklar.0.slug %}">
+                                {{ yangiliklar.0.nomi }}
+                            </a>
+                        </p>
+                        <div class="date">{{ yangiliklar.0.sana }}</div>
+                    </div>
+                </div>
+                <div class="col-md-4 img_info_wrap" style="opacity: 1; top: 0px;">
+                    {% for yangilik in yangiliklar|slice:"1:4" %}
+                        <div class="img_info">
+                            <p>
+                                <a href="{% url 'detail' yangilik.slug %}">
+                                    {{ yangilik.nomi }}
+                                </a>
+                            </p>
+                            <div class="date">{{ yangilik.sana }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="news_wrap">
+    <div class="container">
+        <a href="{% url 'toplam' %}?code=yangiliklar" class="more_news">Ko'proq yangiliklarni o'qish</a>
+    </div>
+</section>
+
+<section id="activities_wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 activities_box" style="opacity: 1; top: 0px;">
+                <h3>So'nggi ma'lumotlar</h3>
+                {% for yangilik in yangiliklar|slice:'1:' %}
+                    <div class="row news__block">
+                        <div class="col-md-3">
+                            <div
+                                style="width: 180px;height: 100px;background: url('{% if yangilik.rasm %} {{ yangilik.rasm.url }}{% else %}data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAMAAACZHrEMAAAAMFBMVEX////MzMzIyMj7+/vU1NTy8vLh4eHPz8/u7u74+Pjm5ub19fXr6+ve3t7a2trX19e2gbruAAACuklEQVR4nO2a2bKjIBBA2ffl//92kLigMYaK9HUe+jyJleiphm4QJQRBEARBEARBEARBEARBEAR5ADuEMS6cjkDzYTLsvs0oGebkTRwbJaOZuXsNAyLjQ5DrZf2jMl6wgliautsGQMbM45i52nQsPyfD9ZIZrFYNTZl8TMatacpiaaqpejwmk7aiIcr4aTrsAZnc1FNC4uvoKZnYRkY2HfaEzDZmqCJiOexKb4DUXgUoD8ts1ZfeADJezwpyy/K+9IaowDZPFTjLUu+2LusJDczcRPw0Rmy7NmDhMZmK2q1vOiofoIw/rLXUkzJ570LZ1xvByRh65Gvlg5PRbzL0W3qDyYST1bk4/OU4f0LJ2JPA0EPs4rESQsmo08cW0d4rlHTfP7QBydgzlf3Cpj717esykEw6l2kf0vLRDkpGfny2XNN76cd22MDIHOtd01HzKFnLc5thIDJnab2QXj/Zkq2ZJUBkztJ6pfZLk2xNfkPInKf1wjR770K35TeAzGm92ygLm8NeTgKUiV+2aTQ//GJdd42XkdcqBfF2xkPJfKx3F2Qgmc/17goFIsPf+6AH5iFkwk8u83w+WuZHF8rSeJnrendpY0bLWP07wo6OzI1r8bGR6d26+4gcJ0O1uMvA7foBjJJRQxjigiAIgiAIch9b36xvmx2271UckEzdHmt2Vm+vj29gRYxVRuVcPSI3KiWZhCcuC0lkTtGRcuoPImYFEYFo7iKR9UWT5iETJ3hIxHAreJESsjR897cJt2Qsne5ZwjKFhheZ4lVuXrrPOM2zKadijmrQt0RfZEpIyj2LSAlCK8NFqC1lSep4VThIhihqg7Bh6aZZxmtualCclULKzi8T7vB6e+M4MUnxV1sa4sN04KIJPHmrMpExPplmM1wHGf+mkzqwwf0HMUEQBEEQBEEQBEEQpPAPI2QewVbjZvEAAAAASUVORK5CYII={% endif %}');background-size: cover;background-position: center;">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <p style="margin-bottom: 10px;">
+                                <a href="{% url 'detail' yangilik.slug %}" class="news__block_tle">
+                                    {{ yangilik.nomi }}
+                                </a>
+                            </p>
+                            {{ yangilik.qisqacha }}
+                        </div>
+                    </div>
+                    <hr style="width: 100%;margin-bottom: 15px;">
+                {% endfor %}
+            </div>
+            <div class="col-md-4 services_wrap" style="opacity: 1; top: 0px;">
+                <h3>Me'yoriy hujjatlar</h3>
+                <ul class="nav navbar-nav" id="main-menu">
+                    {% for url in meyoriyhujjatlar.children.all %}
+                        <li class="dropdown parent">
+                            <a href="{{ url.slug }}">
+                                {{ url.nomi }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
+<div class="blue_bg">
+    <div class="container another_contain nopade">
+        <ul class="ways">
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a target="_blank" href="/interaktiv-xizmatlar/">
+                    <div class="circle green"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/list1.png"></div>
+                    <span class="circle_name">Interaktiv xizmatlar</span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a target="_blank" href="/interaktiv-xizmatlar/ochiq-malumotlar/">
+                    <div class="circle red"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/list2.png"></div>
+                    <span class="circle_name">Ochiq ma'lumotlar</span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a target="_blank" href="/interaktiv-xizmatlar/notarial-harakatlar-uchun-davlat-boji-stavkalari/">
+                    <div class="circle brown"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/list3.png"></div>
+                    <span class="circle_name">Notarial harakatlar uchun Davlat boji stavkalari</span>
+                </a>
+            </li>
+            <li class="clearfix"></li>
+        </ul>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="white_bg">
+    <div class="container another_contain nopade">
+        <ul class="ways">
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="/murojaatlar/">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/95ffa761ec4d581501035fe5ddd92575.png">
+                    </div>
+                    <span class="circle_name">Onalyn murojaat</span>
+                    <span class="circle_text">Hokim va hokim o‘rinbosarlariga elektron murojaat yo'llash</span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="#">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/c0aab14565686bd8b28027f9d30a1202.png">
+                    </div>
+                    <span class="circle_name">Statistik ma’lumotlar</span>
+                    <span class="circle_text">Turli xil sohalarda statistik va ijtimoiy-iqtisodiy ko‘rsatkichlar</span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="#  ">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/8fc2749f84833590ea65e7b26d7cf1b7.png">
+                    </div>
+                    <span class="circle_name">Jismoniy va yuridik shaxslarning murojaatlari</span>
+                    <span class="circle_text">Jismoniy va yuridik shaxslarning elektron murojaatlari statistikasi</span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="#">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/3beabc3885becb4a0d2c65f05427d9bb.png">
+                    </div>
+                    <span class="circle_name">Normativ huquqiy hujjatlar</span>
+                    <span class="circle_text">
+                        Normativ huquqiy hujjatlar, Qonunlar, qarorlar va hok..
+                        <br>
+                    </span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="#">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/0caf3d6b2cebce8c343f22eec333296b.png">
+                    </div>
+                    <span class="circle_name">Viloyat boshqarmalari</span>
+                    <span class="circle_text">Viloyat boshqarma va tashkilotlari haqida ma’lumot</span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="#">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/6b5869356902b7b8abc13b5960d5071b.png">
+                    </div>
+                    <span class="circle_name">Tender savdolari va bo‘sh turgan erlar</span>
+                    <span class="circle_text">
+                        Yangiariq tumani bo‘yicha o‘tkaziladigan tender savdolari va bo'sh turgan yerlar
+                        <br>
+                    </span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="#">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/74206eb6d5c35db7bb6dc0f8dd8c3869.png">
+                    </div>
+                    <span class="circle_name">Litsenziyalash</span>
+                    <span class="circle_text">Ruxsat berish tusidagi qonunchilik hujjatlari haqida ma’lumot</span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="#">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/b486969e2ad8b21ad821cc9ddabbba78.png">
+                    </div>
+                    <span class="circle_name">Hamkorlik</span>
+                    <span class="circle_text">Xalqaro tashkilotlar va boshqa tashkilotlar bilan aloqalar</span>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-6 nopadeleft">
+                <a href="#">
+                    <div class="circle blue"><img src="http://yangiarikhokimiyat.uz/templates/Reflex/images/77c874e6e8240ee53d319740821214bb.png">
+                    </div>
+                    <span class="circle_name">E’lonlar</span>
+                    <span class="circle_text">Yangiariq tumani bo‘yicha e’lonlar</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<!-- <section id="banner_wrap" class="inner_banner">
+    <div class="container">
+        <div class="row banner_box">
+            <div class="bannerImg online_application">
+                <div class="order_info">
+                    <h3><a href="/murojaatlar/">Jismoniy va yuridik shaxslar</a>Onlayn murojaatlari</h3>
+                    <div class="order"><a href="/murojaatlar/">Murojaat yo'llash</a></div>
+                </div>
+            </div>
+            <div class="bannerImg">
+                <div class="container-donut">
+                    <div class="cdc-container">
+                        <div class="cdc"
+                            style="width: 200px; padding-bottom: 200px; background-color: rgb(238, 238, 238);">
+                            <div class="cdc-sections" style="transform: rotate(0deg);">
+                                <div class="cdc-section cdc-section-right" style="transform: rotate(0deg);">
+                                    <div title="O'rganilayotgan murojaatlar (2)" class="cdc-filler"
+                                        style="background-color: rgb(255, 99, 132); transform: rotate(-150deg);"></div>
+                                </div>
+                                <div class="cdc-section cdc-section-right" style="transform: rotate(30deg);">
+                                    <div title="Yopilgan murojaatlar (12)" class="cdc-filler"
+                                        style="background-color: rgb(60, 180, 75); transform: rotate(-22deg);"></div>
+                                </div>
+                                <div class="cdc-section cdc-section-left" style="transform: rotate(0deg);">
+                                    <div title="Yopilgan murojaatlar (12)" class="cdc-filler"
+                                        style="background-color: rgb(60, 180, 75); transform: rotate(252deg);"></div>
+                                </div>
+                                <div class="cdc-section cdc-section-left" style="transform: rotate(72deg);">
+                                    <div title="Yopilgan murojaatlar (12)" class="cdc-filler"
+                                        style="background-color: rgb(60, 180, 75); transform: rotate(288deg);"></div>
+                                </div>
+                            </div>
+
+                            <div class="cdc-overlay"
+                                style="height: 80%; width: 80%; top: calc(10%); left: calc(10%); background-color: rgb(255, 255, 255);">
+                                <div class="cdc-text" style="font-size: 16px;">
+                                    <div>
+                                        <h1 style="margin: 0;">14</h1>Jami murojaatlar
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cdc-legend" style="flex-direction: column; margin: 0px 0px 0px 1em;">
+                            <span title="80 (80%)" class="cdc-legend-item"><span class="cdc-legend-item-color"
+                                    style="background-color: rgb(255, 99, 132);"></span><span>O'rganilmoqda
+                                    (2)</span></span>
+                            <span title="20 (20%)" class="cdc-legend-item"><span class="cdc-legend-item-color"
+                                    style="background-color: rgb(60, 180, 75);"></span><span>Yopilgan (12)</span></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section> -->
+<section id="video_wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 videobox_right" style="opacity: 1; top: 0px;">
+                <div class="video_bluebox">&nbsp;</div>
+                <div class="video_dot_bg">&nbsp;</div>
+
+                <div class="videobox_thumb">
+
+                </div>
+            </div>
+        </div>
+        <div href="#" class="videoMore"><a href="https://www.youtube.com/user/NCPIBELARUS" target="_blank">Больше
+                видео</a></div>
+    </div>
+</section>
+<div class="back-top-mobile">
+    <div class="container">
+        <span class="totop">Yuqoriga chiqish</span>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="breadcrumbWrap">
+    <div class="breadcrumbFullwidth">
+        <div class="leftBreadcrumb">
+
+        </div>
+        <div class="container content">
+            <div class="hallofFameWrap">
+                <div class="hallofFameCon row">
+                    <div class="row">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="/">Bosh sahifa</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    O'zbekiston yangiliklari
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    {{ post.nomi|safe }}
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <section id="container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="sidebar col-md-12 col-lg-3">
+                                    <div class="row">
+                                        <div class="normalContentMenu">
+                                            <h3>Bo'limlar</h3>
+                                            <ul class="nav navbar-nav" id="main-menu">
+                                                {% for url in bolimlar.children.all %}
+                                                    <li class="dropdown parent">
+                                                        <a href="{{ url.slug }}">
+                                                            {{ url.nomi }}
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="order_processing_box">
+                                            <h4>Tuman hokimi qabuli</h4>
+                                            <p>
+                                                Har xaftaning payshanba kuni
+                                                soat 10:00 dan boshlab
+                                                tuman hokimligi
+                                                binosida qabul qilinadi.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="contentCol col-md-12 col-lg-9">
+                                    <div class="row">
+                                        <div class="content clearfix">
+                                            <div class="leftMenuMob">
+                                                <div id="dd" class="wrapper-dropdown-3 leftMenusm" tabindex="1">
+                                                    <span>Menu</span>
+                                                    <ul class="nav navbar-nav" id="main-menu">
+                                                        {% for kategory in urls %}
+                                                            <li class="dropdown parent">
+                                                                <a href="#">{{ kategory.nomi }}</a>
+                                                                <ul class="dropdown-menu">
+                                                                    {% for url in kategory.children.all %}
+                                                                        <li class="dropdown parent">
+                                                                            <a href="{{ url.slug }}">{{ url.nomi }}</a>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <h3 class="bottom_border">
+                                                {{ post.nomi|safe }}
+                                            </h3>
+                                            <div style="text-align:justify;">
+                                                {{post.matni|safe}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="bottom_part">
+                        <div class="container"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
