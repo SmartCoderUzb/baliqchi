@@ -14,7 +14,7 @@ def home(request):
     }
     context['urls'] = get_urls()
     context['yangiliklar'] = Post.objects.filter(toplam="yangiliklar")
-    context['meyoriyhujjatlar'] = Kategoriya.objects.all()[4]
+    context['meyoriyhujjatlar'] = Kategoriya.objects.all().first()
     return render(request, "home.html",context)
 
 def toplam(request):
@@ -22,7 +22,7 @@ def toplam(request):
 
     }
     context['urls'] = get_urls()
-    context['meyoriyhujjatlar'] = Kategoriya.objects.all()[5]
+    context['meyoriyhujjatlar'] = Kategoriya.objects.all().first()
     code = request.GET.get('code')
     if not code:
         code = "yangiliklar"
@@ -35,6 +35,6 @@ def toplam(request):
 def postdetail(request,slug):
     context = {}
     context['urls'] = get_urls()
-    context['bolimlar'] = Kategoriya.objects.all()[3]
+    context['bolimlar'] = Kategoriya.objects.all().first()
     context['post'] = Post.objects.get(slug=slug)
     return render(request, 'post-detail.html',context)
